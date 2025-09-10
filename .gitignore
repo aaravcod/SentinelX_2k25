@@ -9,6 +9,7 @@ pycache/
 *.pyd
 
 Virtual environment folders
+Collaborators will create their own based on requirements.txt
 venv/
 .venv/
 env/
