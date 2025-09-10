@@ -1,0 +1,24 @@
+Environment variables and secrets
+NEVER commit this file to version control.
+.env
+
+Python specific files
+pycache/
+*.pyc
+*.pyo
+*.pyd
+
+Virtual environment folders
+venv/
+.venv/
+env/
+.env/
+
+IDE and editor specific files
+.vscode/
+.idea/
+*.swp
+
+OS-specific files
+.DS_Store
+Thumbs.db
