@@ -23,3 +23,5 @@ IDE and editor specific files
 OS-specific files
 .DS_Store
 Thumbs.db
+
+/node_modules
