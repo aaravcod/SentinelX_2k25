@@ -19,6 +19,7 @@ import {
   MdVerifiedUser,
   MdWarning
 } from 'react-icons/md';
+import axios from "axios";
 
 const OCRDigitizationPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -30,78 +31,40 @@ const OCRDigitizationPage = () => {
   const fileInputRef = useRef(null);
 
   // Simulated OCR processing function
-  const simulateOCRProcessing = async (file) => {
-    setIsProcessing(true);
-    
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    // Mock OCR results
-    const mockOCRText = `
-    Forest Rights Act - Individual Claim Form
-    
-    Claim No: FRA/2024/MYB/001234
-    Date of Application: 15th March 2024
-    
-    Personal Details:
-    Name of Claimant: Ramesh Kumar Singh
-    Father's Name: Govind Singh
-    Village: Kendumundi
-    Block: Rairangpur
-    District: Mayurbhanj
-    State: Odisha
-    
-    Land Details:
-    Survey Number: 45/2A
-    Area Claimed: 2.34 hectares
-    Coordinates: 22.1234°N, 86.5678°E
-    Type of Claim: Individual Forest Rights (IFR)
-    
-    Status: Pending Verification
-    Date of Survey: 28th March 2024
-    Revenue Inspector: Mr. Subash Panda
-    `;
+const OCRprocessing = async (file) => {
+  setIsProcessing(true);
 
-    // Mock NER results
-    const mockNERResults = {
-      entities: [
-        { text: "Ramesh Kumar Singh", label: "PERSON", confidence: 0.98, start: 145, end: 162 },
-        { text: "Govind Singh", label: "PERSON", confidence: 0.95, start: 180, end: 192 },
-        { text: "Kendumundi", label: "LOCATION", confidence: 0.92, start: 202, end: 212 },
-        { text: "Rairangpur", label: "LOCATION", confidence: 0.94, start: 220, end: 230 },
-        { text: "Mayurbhanj", label: "LOCATION", confidence: 0.96, start: 241, end: 251 },
-        { text: "Odisha", label: "LOCATION", confidence: 0.99, start: 259, end: 265 },
-        { text: "22.1234°N, 86.5678°E", label: "COORDINATES", confidence: 0.89, start: 380, end: 401 },
-        { text: "2.34 hectares", label: "AREA", confidence: 0.93, start: 340, end: 353 },
-        { text: "FRA/2024/MYB/001234", label: "CLAIM_ID", confidence: 0.97, start: 65, end: 85 },
-        { text: "Pending Verification", label: "STATUS", confidence: 0.91, start: 450, end: 470 }
-      ]
-    };
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
 
-    // Mock structured data extraction
-    const mockExtractedData = {
-      claimNumber: "FRA/2024/MYB/001234",
-      claimantName: "Ramesh Kumar Singh",
-      fatherName: "Govind Singh",
-      village: "Kendumundi",
-      block: "Rairangpur",
-      district: "Mayurbhanj",
-      state: "Odisha",
-      surveyNumber: "45/2A",
-      areaClaimed: "2.34",
-      coordinates: "22.1234°N, 86.5678°E",
-      claimType: "Individual Forest Rights (IFR)",
-      status: "Pending Verification",
-      applicationDate: "15th March 2024",
-      surveyDate: "28th March 2024",
-      revenueInspector: "Mr. Subash Panda"
-    };
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/extract",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
-    setOcrResults(mockOCRText);
-    setNerResults(mockNERResults);
-    setExtractedData(mockExtractedData);
+    const data = response.data;
+
+    // Store the whole extracted JSON
+    setExtractedData(data);
+
+    // Optional: show raw JSON as text for debugging/preview
+    setOcrResults(JSON.stringify(data, null, 2));
+
+  } catch (error) {
+    console.error("OCR API error:", error);
+    alert("Failed to process the document. Check console for details.");
+  } finally {
     setIsProcessing(false);
-  };
+  }
+};
+
+
 
   // File upload handler
   const handleFileUpload = (event) => {
@@ -122,7 +85,7 @@ const OCRDigitizationPage = () => {
   // Process file
   const handleProcessFile = async (fileItem) => {
     setSelectedFile(fileItem);
-    await simulateOCRProcessing(fileItem.file);
+    await OCRprocessing(fileItem.file);
   };
 
   // Delete file
