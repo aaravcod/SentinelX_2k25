@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+
 import { FiMap } from 'react-icons/fi';
 import { MdInfo, MdClose } from 'react-icons/md';
 
 const AtlasPage = () => {
-  const [infoPanelOpen, setInfoPanelOpen] = useState(false);
+  // const [infoPanelOpen] = useState(false);
 
   return (
     <div className="flex flex-col lg:flex-row h-full gap-6">
       {/* Left Panel - Filters */}
-      <div className="w-full lg:w-1/4 bg-white rounded-xl shadow-md p-6">
+      {/* <div className="w-full lg:w-1/4 bg-white rounded-xl shadow-md p-6">
         <h3 className="text-lg font-semibold text-slate-800 mb-4">Filters & Layers</h3>
         
         <div className="space-y-4">
@@ -57,39 +57,46 @@ const AtlasPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Center Panel - Map */}
       <div className="w-full lg:flex-1 bg-white rounded-xl shadow-md p-6 relative">
         <h3 className="text-lg font-semibold text-slate-800 mb-4">Interactive Map</h3>
         
-        <div className="h-64 md:h-80 lg:h-full bg-gradient-to-br from-green-100 to-emerald-200 rounded-lg relative overflow-hidden">
+        {/* <div className="h-64 md:h-80 lg:h-full bg-gradient-to-br from-green-100 to-emerald-200 rounded-lg relative overflow-hidden"> */}
           {/* Map Placeholder */}
-          <div className="absolute inset-4 bg-green-50 rounded border-2 border-dashed border-emerald-300 flex items-center justify-center">
+          {/* <div className="absolute inset-4 bg-green-50 rounded border-2 border-dashed border-emerald-300 flex items-center justify-center">
             <div className="text-center">
               <FiMap className="w-16 md:w-20 h-16 md:h-20 text-emerald-400 mx-auto mb-4" />
               <p className="text-emerald-600 font-medium text-base lg:text-lg">FRA Claims Map</p>
               <p className="text-slate-500 text-xs md:text-sm mt-2">Click on features to view details</p>
             </div>
-          </div>
+          </div> */}
 
           {/* Info Button */}
-          <button
+          {/* <button
             onClick={() => setInfoPanelOpen(true)}
             className="absolute top-4 md:top-6 right-4 md:right-6 bg-emerald-600 text-white p-2 md:p-3 rounded-lg shadow-lg hover:bg-emerald-700 transition-colors"
           >
             <MdInfo className="w-4 md:w-5 h-4 md:h-5" />
-          </button>
-        </div>
+          </button> */}
+        {/* </div> */}
+         <iframe
+        src="http://localhost:8000/api/map/"  // Your backend endpoint
+        width="100%"
+        height="100%"
+        style={{ border: "none" }}
+        title="SentinelX Map"
+      ></iframe>
       </div>
 
-      {/* Right Panel - Information Drawer */}
+      {/* Right Panel - Information Drawer
       <div className={`w-full lg:w-1/4 bg-white rounded-xl shadow-md transition-all duration-300 ${
         infoPanelOpen 
           ? 'translate-x-0' 
           : 'translate-x-full lg:translate-x-0'
-      } fixed lg:relative top-0 right-0 h-full lg:h-auto z-50 lg:z-auto`}>
-        <div className="p-6">
+      } fixed lg:relative top-0 right-0 h-full lg:h-auto z-50 lg:z-auto`}> */}
+        {/* <div className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-slate-800">Claim Details</h3>
             <button
@@ -139,8 +146,8 @@ const AtlasPage = () => {
               </button>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </div>
   );
 };

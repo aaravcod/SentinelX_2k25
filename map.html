@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e9ff703c8fd87449aaaf9f5f37a89166 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_e9ff703c8fd87449aaaf9f5f37a89166" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_e9ff703c8fd87449aaaf9f5f37a89166 = L.map(
+                "map_e9ff703c8fd87449aaaf9f5f37a89166",
+                {
+                    center: [22.941793, 81.076843],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e23a82fb97c07f556a2a0f8bb000b116 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e23a82fb97c07f556a2a0f8bb000b116.addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+        
+    
+            var marker_c9485c24b6182faa69502c34fc4a9879 = L.marker(
+                [22.941793, 81.076843],
+                {
+}
+            ).addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+        
+    
+            var icon_cef92c4c3a53058f5771d733095d0960 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e80ece71d49067d93442d34893a12e9d = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_04eb5fe73deebb4c09daa19936d0512d = $(`<div id="html_04eb5fe73deebb4c09daa19936d0512d" style="width: 100.0%; height: 100.0%;"> <b>Certificate No.:</b> FRA-MP-2025-DIND001<br> <b>Issue Date:</b> 11-09-2025<br><br> <b>Claimant:</b> Bhima Gond<br> <b>Spouse:</b> Lalita Gond<br> <b>Father/Mother:</b> Late Kali Gond<br><br> <b>Survey/Plot No.:</b> 45A/12B<br> <b>Area:</b> 2.3 hectares<br> <b>Type:</b> Agricultural (upland, rice + millets)<br> </div>`)[0];
+                popup_e80ece71d49067d93442d34893a12e9d.setContent(html_04eb5fe73deebb4c09daa19936d0512d);
+            
+        
+
+        marker_c9485c24b6182faa69502c34fc4a9879.bindPopup(popup_e80ece71d49067d93442d34893a12e9d)
+        ;
+
+        
+    
+    
+            marker_c9485c24b6182faa69502c34fc4a9879.bindTooltip(
+                `<div>
+                     FRA Patta Holder: Bhima Gond
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c9485c24b6182faa69502c34fc4a9879.setIcon(icon_cef92c4c3a53058f5771d733095d0960);
+            
+    
+            var polygon_430a82832fcc9932ba527995ee6d0963 = L.polygon(
+                [[22.941113, 81.076163], [22.941113, 81.077523], [22.942473, 81.077523], [22.942473, 81.076163], [22.941113, 81.076163]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+        
+    
+            polygon_430a82832fcc9932ba527995ee6d0963.bindTooltip(
+                `<div>
+                     Approx. Land Parcel (2.3 ha)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var tile_layer_10845b883c2ef6cb6ff7408e36f2548c = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/intricate-pad-471317-q8/maps/7f6154e45862b368876a4b74abffe065-126619951cf2dd482b579b577175acc6/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.7,
+}
+
+            );
+        
+    
+            tile_layer_10845b883c2ef6cb6ff7408e36f2548c.addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+        
+    
+            var tile_layer_3302ea9d9a5edab05e07f733beb17f9a = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/intricate-pad-471317-q8/maps/766885dc2bbc43a8a6463304e09df481-fb2209f0c04f124fd94bcc5b3ce5c3c9/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.7,
+}
+
+            );
+        
+    
+            tile_layer_3302ea9d9a5edab05e07f733beb17f9a.addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+        
+    
+            var tile_layer_e19619c1d53a631eec274e0eef2ebcda = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/intricate-pad-471317-q8/maps/da6f5ccd34b2218fc5af81c4cb52d6d3-2c2a3ae5db26abb89ac60ca792346de2/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.7,
+}
+
+            );
+        
+    
+            tile_layer_e19619c1d53a631eec274e0eef2ebcda.addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+        
+    
+            var tile_layer_771982ef54a83226556130109ee9500a = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/intricate-pad-471317-q8/maps/ec26e6a4fd0fb92a142ffe3535c20c4d-e962b54a28d64ea14fc29230fac83fd7/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.7,
+}
+
+            );
+        
+    
+            tile_layer_771982ef54a83226556130109ee9500a.addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+        
+    
+            var layer_control_49d8bd3a84dab010d02d26b093177ea8_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_e23a82fb97c07f556a2a0f8bb000b116,
+                },
+                overlays :  {
+                    "Sentinel-2 True Color" : tile_layer_10845b883c2ef6cb6ff7408e36f2548c,
+                    "Sentinel-2 False Color" : tile_layer_3302ea9d9a5edab05e07f733beb17f9a,
+                    "NDVI (Vegetation)" : tile_layer_e19619c1d53a631eec274e0eef2ebcda,
+                    "NDWI (Water)" : tile_layer_771982ef54a83226556130109ee9500a,
+                },
+            };
+            let layer_control_49d8bd3a84dab010d02d26b093177ea8 = L.control.layers(
+                layer_control_49d8bd3a84dab010d02d26b093177ea8_layers.base_layers,
+                layer_control_49d8bd3a84dab010d02d26b093177ea8_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_e9ff703c8fd87449aaaf9f5f37a89166);
+
+        
+</script>
+</html>
