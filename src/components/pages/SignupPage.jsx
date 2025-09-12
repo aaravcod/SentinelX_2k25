@@ -24,9 +24,9 @@ const SignupPage = () => {
   }, [isSignedIn, navigate]);
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+    <div className="min-h-screen flex bg-gradient-to-br from-secondary-50 via-white to-primary-50">
       {/* Left: Branding & Info Panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-600 to-emerald-800 p-12 text-white relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary-600 to-primary-800 p-12 text-white relative overflow-hidden">
         {/* Background Patterns */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <FaLeaf className="absolute top-20 left-20 w-32 h-32 rotate-12" />
@@ -39,13 +39,13 @@ const SignupPage = () => {
               <FaTree className="w-7 h-7" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">FRA Drishti</h1>
-              <p className="text-emerald-100 text-lg">Govt. Forest Rights Data Portal</p>
+              <h1 className="text-3xl font-bold">SentinelX</h1>
+              <p className="text-primary-100 text-lg">Govt. Forest Rights Data Portal</p>
             </div>
           </div>
           {/* Headline */}
-          <h2 className="text-4xl font-bold mb-4">Join FRA Drishti</h2>
-          <p className="text-emerald-100 mb-6 text-lg max-w-xl">
+          <h2 className="text-4xl font-bold mb-4">Join SentinelX</h2>
+          <p className="text-primary-100 mb-6 text-lg max-w-xl">
             Create your secure account for data-driven forest rights governance and collaboration.
           </p>
           {/* Compliance & Security */}
@@ -73,7 +73,7 @@ const SignupPage = () => {
           </div>
           {/* CTA */}
           <div className="mt-auto">
-            <div className="bg-emerald-500 bg-opacity-20 rounded-lg p-4 flex items-center gap-3">
+            <div className="bg-accent-500 bg-opacity-20 rounded-lg p-4 flex items-center gap-3">
               <FiUserPlus className="w-6 h-6 flex-shrink-0" />
               <span className="text-lg font-medium">
                 Register today for secure data access and collaboration
@@ -92,14 +92,14 @@ const SignupPage = () => {
               elements: {
                 rootBox: "mx-auto",
                 card: "shadow-none border-0",
-                formButtonPrimary: "bg-emerald-600 hover:bg-emerald-700",
-                formFieldInput: "border-slate-200 focus:ring-emerald-500 focus:border-emerald-500",
+                formButtonPrimary: "bg-primary-600 hover:bg-primary-700",
+                formFieldInput: "border-secondary-200 focus:ring-primary-500 focus:border-primary-500",
               },
             }}
             signInUrl="/login"
           />
           <p className="mt-6 text-center text-sm">
-            <Link to="/" className="text-black-600 hover:text-emerald-800 font-medium">Back Home</Link>
+            <Link to="/" className="text-secondary-600 hover:text-primary-800 font-medium">Back Home</Link>
           </p>
         </div>
       </div>
