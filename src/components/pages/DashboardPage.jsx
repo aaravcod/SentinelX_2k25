@@ -1,4 +1,3 @@
-
 import { 
   MdAssignment,     // Claims
   MdVerifiedUser,   // Titles  
@@ -34,11 +33,11 @@ const DashboardPage = () => {
             <div key={index} className="bg-white rounded-xl shadow-md p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-slate-500 text-sm font-medium">{kpi.title}</p>
-                  <p className="text-2xl font-bold text-slate-800 mt-1">{kpi.value}</p>
+                  <p className="text-secondary-500 text-sm font-medium">{kpi.title}</p>
+                  <p className="text-2xl font-bold text-secondary-800 mt-1">{kpi.value}</p>
                 </div>
-                <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
-                  <IconComponent className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <IconComponent className="w-6 h-6 text-primary-600" />
                 </div>
               </div>
             </div>
@@ -50,37 +49,37 @@ const DashboardPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Map Container */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
-          <h3 className="text-lg font-semibold text-slate-800 mb-4">Implementation Progress Map</h3>
-          <div className="h-96 bg-gradient-to-br from-green-50 to-emerald-100 rounded-lg flex items-center justify-center border-2 border-dashed border-emerald-200">
+          <h3 className="text-lg font-semibold text-secondary-800 mb-4">Implementation Progress Map</h3>
+          <div className="h-96 bg-gradient-to-br from-primary-50 to-primary-100 rounded-lg flex items-center justify-center border-2 border-dashed border-primary-200">
             <div className="text-center">
-              <FiMap className="w-16 h-16 text-emerald-400 mx-auto mb-4" />
-              <p className="text-emerald-600 font-medium">Interactive Map View</p>
-              <p className="text-slate-500 text-sm mt-1">Geographical distribution of FRA claims</p>
+              <FiMap className="w-16 h-16 text-primary-400 mx-auto mb-4" />
+              <p className="text-primary-600 font-medium">Interactive Map View</p>
+              <p className="text-secondary-500 text-sm mt-1">Geographical distribution of FRA claims</p>
             </div>
           </div>
         </div>
 
         {/* Alerts Panel */}
         <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="text-lg font-semibold text-slate-800 mb-4">Recent Alerts</h3>
+          <h3 className="text-lg font-semibold text-secondary-800 mb-4">Recent Alerts</h3>
           <div className="space-y-4">
             {alerts.map((alert, index) => (
               <div key={index} className={`p-4 rounded-lg border-l-4 ${
                 alert.type === 'error' ? 'bg-red-50 border-red-400' :
                 alert.type === 'warning' ? 'bg-yellow-50 border-yellow-400' :
-                alert.type === 'success' ? 'bg-emerald-50 border-emerald-400' :
+                alert.type === 'success' ? 'bg-primary-50 border-primary-400' :
                 'bg-blue-50 border-blue-400'
               }`}>
                 <div className="flex items-start gap-3">
                   <MdWarning className={`w-5 h-5 mt-0.5 ${
                     alert.type === 'error' ? 'text-red-500' :
                     alert.type === 'warning' ? 'text-yellow-500' :
-                    alert.type === 'success' ? 'text-emerald-500' :
+                    alert.type === 'success' ? 'text-primary-500' :
                     'text-blue-500'
                   }`} />
                   <div>
-                    <h4 className="font-medium text-slate-800 text-sm">{alert.title}</h4>
-                    <p className="text-slate-600 text-xs mt-1">{alert.description}</p>
+                    <h4 className="font-medium text-secondary-800 text-sm">{alert.title}</h4>
+                    <p className="text-secondary-600 text-xs mt-1">{alert.description}</p>
                   </div>
                 </div>
               </div>
