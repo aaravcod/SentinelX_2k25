@@ -33,7 +33,7 @@ popup_info = f"""
 <b>Certificate No.:</b> FRA-MP-2025-DIND001<br>
 <b>Issue Date:</b> 11-09-2025<br><br>
 
-<b>Name of Claimant(s):</b> Bhima Gond<br>
+<b>Name of Claimant(s):</b> Ramesh Gond<br>
 <b>Spouse:</b> Lalita Gond<br>
 <b>Father/Mother:</b> Late Kali Gond<br><br>
 
@@ -59,7 +59,7 @@ West: Village road
 folium.Marker(
     location=[lat, lon],
     popup=folium.Popup(popup_info, max_width=400),
-    tooltip="FRA Patta Holder: Bhima Gond",
+    tooltip="FRA Patta Holder: Ramesh Gond",
     icon=folium.Icon(color="green", icon="leaf", prefix="fa")
 ).add_to(m)
 
@@ -91,7 +91,7 @@ m = folium.Map(location=[lat, lon], zoom_start=15)
 popup_info = f"""
 <b>Certificate No.:</b> FRA-MP-2025-DIND001<br>
 <b>Issue Date:</b> 11-09-2025<br><br>
-<b>Claimant:</b> Bhima Gond<br>
+<b>Claimant:</b> Ramesh Gond<br>
 <b>Spouse:</b> Lalita Gond<br>
 <b>Father/Mother:</b> Late Kali Gond<br><br>
 <b>Survey/Plot No.:</b> 45A/12B<br>
@@ -103,7 +103,7 @@ popup_info = f"""
 folium.Marker(
     location=[lat, lon],
     popup=folium.Popup(popup_info, max_width=400),
-    tooltip="FRA Patta Holder: Bhima Gond",
+    tooltip="FRA Patta Holder: Ramesh Gond",
     icon=folium.Icon(color="green", icon="leaf", prefix="fa")
 ).add_to(m)
 
@@ -159,7 +159,7 @@ m = folium.Map(location=[lat, lon], zoom_start=15)
 popup_info = """
 <b>Certificate No.:</b> FRA-MP-2025-DIND001<br>
 <b>Issue Date:</b> 11-09-2025<br><br>
-<b>Claimant:</b> Bhima Gond<br>
+<b>Claimant:</b> Ramesh Gond<br>
 <b>Spouse:</b> Lalita Gond<br>
 <b>Father/Mother:</b> Late Kali Gond<br><br>
 <b>Survey/Plot No.:</b> 45A/12B<br>
@@ -170,7 +170,7 @@ popup_info = """
 folium.Marker(
     [lat, lon],
     popup=folium.Popup(popup_info, max_width=400),
-    tooltip="FRA Patta Holder: Bhima Gond",
+    tooltip="FRA Patta Holder: Ramesh Gond",
     icon=folium.Icon(color="green", icon="leaf", prefix="fa")
 ).add_to(m)
 
@@ -227,7 +227,7 @@ m = folium.Map(location=[lat, lon], zoom_start=15)
 popup_info = """
 <b>Certificate No.:</b> FRA-MP-2025-DIND001<br>
 <b>Issue Date:</b> 11-09-2025<br><br>
-<b>Claimant:</b> Bhima Gond<br>
+<b>Claimant:</b> Ramesh Gond<br>
 <b>Spouse:</b> Lalita Gond<br>
 <b>Father/Mother:</b> Late Kali Gond<br><br>
 <b>Survey/Plot No.:</b> 45A/12B<br>
@@ -238,7 +238,7 @@ popup_info = """
 folium.Marker(
     [lat, lon],
     popup=folium.Popup(popup_info, max_width=400),
-    tooltip="FRA Patta Holder: Bhima Gond",
+    tooltip="FRA Patta Holder: Ramesh Gond",
     icon=folium.Icon(color="green", icon="leaf", prefix="fa")
 ).add_to(m)
 
