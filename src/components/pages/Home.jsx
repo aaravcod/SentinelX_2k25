@@ -371,10 +371,10 @@ const Home = () => {
         <div className="max-w-2xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
-              Send Us Your Feedback
+              Report an Issue
             </h2>
             <p className="text-lg text-slate-600">
-              Help us improve FRA Drishti with your suggestions and comments.
+              Use this form to report land and water-related issues in your area so that they can be addressed promptly.
             </p>
           </div>
 
@@ -390,7 +390,7 @@ const Home = () => {
               {/* Name Field */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
-                  Name *
+                  Name 
                 </label>
                 <input
                   type="text"
@@ -404,19 +404,36 @@ const Home = () => {
                 />
               </div>
 
-              {/* Email Field */}
+              {/* Number Field */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
-                  Email *
+                  Contact Number 
                 </label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  type="number"
+                  id="number"
+                  name="number"
+                  value={formData.mobile}
                   onChange={handleChange}
                   required
-                  placeholder="your.email@example.com"
+                  placeholder="+91-85XXXXXXXX"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                />
+              </div>
+
+              {/* district */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+                  District
+                </label>
+                <input
+                  type="text"
+                  id="district"
+                  name="district"
+                  value={formData.district}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter Your District Name"
                   className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                 />
               </div>
@@ -424,7 +441,7 @@ const Home = () => {
               {/* Message Field */}
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
-                  Message *
+                  Message 
                 </label>
                 <textarea
                   id="message"
@@ -445,7 +462,7 @@ const Home = () => {
                   className="w-full bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors duration-300 flex items-center justify-center gap-2"
                 >
                   <FiFileText className="w-5 h-5" />
-                  Send Feedback
+                  Send 
                 </button>
               </div>
             </form>

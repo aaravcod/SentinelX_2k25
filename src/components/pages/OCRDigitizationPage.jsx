@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { 
-  FiUpload, 
-  FiFile, 
-  FiEye, 
+import {
+  FiUpload,
+  FiFile,
+  FiEye,
   FiDownload,
   FiRefreshCw,
   FiTrash2,
@@ -10,8 +10,8 @@ import {
   FiX,
   FiEdit3
 } from 'react-icons/fi';
-import { 
-  MdCloudUpload, 
+import {
+  MdCloudUpload,
   MdDocumentScanner,
   MdTextFields,
   MdLocationOn,
@@ -31,38 +31,41 @@ const OCRDigitizationPage = () => {
   const fileInputRef = useRef(null);
 
   // Simulated OCR processing function
-const OCRprocessing = async (file) => {
-  setIsProcessing(true);
+  const OCRprocessing = async (file) => {
+    setIsProcessing(true);
 
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/api/extract",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/extract",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    const data = response.data;
+      const data = response.data;
 
-    // Store the whole extracted JSON
-    setExtractedData(data);
+      // Store the whole extracted JSON
+      setExtractedData(data);
 
-    // Optional: show raw JSON as text for debugging/preview
-    setOcrResults(JSON.stringify(data, null, 2));
+      // Optional: show raw JSON as text for debugging/preview
+      setOcrResults(JSON.stringify(data, null, 2));
 
-  } catch (error) {
-    console.error("OCR API error:", error);
-    alert("Failed to process the document. Check console for details.");
-  } finally {
-    setIsProcessing(false);
-  }
-};
+      //NER tick
+      setNerResults({ entities: data.entities || [] });
+
+    } catch (error) {
+      console.error("OCR API error:", error);
+      alert("Failed to process the document. Check console for details.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
 
 
@@ -78,13 +81,18 @@ const OCRprocessing = async (file) => {
       status: 'uploaded',
       uploadDate: new Date().toISOString()
     }));
-    
+
     setUploadedFiles(prev => [...prev, ...newFiles]);
   };
 
   // Process file
   const handleProcessFile = async (fileItem) => {
     setSelectedFile(fileItem);
+
+    setOcrResults(null);
+    setNerResults(null);
+    setExtractedData(null);
+
     await OCRprocessing(fileItem.file);
   };
 
@@ -111,10 +119,10 @@ const OCRprocessing = async (file) => {
   // Render entity with highlighting
   const renderHighlightedText = (text, entities) => {
     if (!entities || entities.length === 0) return text;
-    
+
     let lastIndex = 0;
     const parts = [];
-    
+
     entities.forEach((entity, index) => {
       // Add text before entity
       if (entity.start > lastIndex) {
@@ -124,29 +132,28 @@ const OCRprocessing = async (file) => {
           </span>
         );
       }
-      
+
       // Add highlighted entity
       parts.push(
         <span
           key={`entity-${index}`}
-          className={`px-1 py-0.5 rounded text-xs font-medium ${
-            entity.label === 'PERSON' ? 'bg-blue-100 text-blue-800' :
-            entity.label === 'LOCATION' ? 'bg-green-100 text-green-800' :
-            entity.label === 'COORDINATES' ? 'bg-purple-100 text-purple-800' :
-            entity.label === 'AREA' ? 'bg-orange-100 text-orange-800' :
-            entity.label === 'CLAIM_ID' ? 'bg-indigo-100 text-indigo-800' :
-            entity.label === 'STATUS' ? 'bg-yellow-100 text-yellow-800' :
-            'bg-gray-100 text-gray-800'
-          }`}
+          className={`px-1 py-0.5 rounded text-xs font-medium ${entity.label === 'PERSON' ? 'bg-blue-100 text-blue-800' :
+              entity.label === 'LOCATION' ? 'bg-green-100 text-green-800' :
+                entity.label === 'COORDINATES' ? 'bg-purple-100 text-purple-800' :
+                  entity.label === 'AREA' ? 'bg-orange-100 text-orange-800' :
+                    entity.label === 'CLAIM_ID' ? 'bg-indigo-100 text-indigo-800' :
+                      entity.label === 'STATUS' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-gray-100 text-gray-800'
+            }`}
           title={`${entity.label} (${Math.round(entity.confidence * 100)}% confidence)`}
         >
           {entity.text}
         </span>
       );
-      
+
       lastIndex = entity.end;
     });
-    
+
     // Add remaining text
     if (lastIndex < text.length) {
       parts.push(
@@ -155,7 +162,7 @@ const OCRprocessing = async (file) => {
         </span>
       );
     }
-    
+
     return parts;
   };
 
@@ -201,7 +208,7 @@ const OCRprocessing = async (file) => {
         {/* File List */}
         <div className="bg-white rounded-xl shadow-md p-6">
           <h3 className="text-lg font-semibold text-slate-800 mb-4">Uploaded Documents</h3>
-          
+
           {uploadedFiles.length === 0 ? (
             <div className="text-center py-8">
               <FiFile className="w-12 h-12 text-slate-300 mx-auto mb-3" />
@@ -212,11 +219,10 @@ const OCRprocessing = async (file) => {
               {uploadedFiles.map((fileItem) => (
                 <div
                   key={fileItem.id}
-                  className={`border rounded-lg p-4 ${
-                    selectedFile?.id === fileItem.id 
-                      ? 'border-emerald-500 bg-emerald-50' 
+                  className={`border rounded-lg p-4 ${selectedFile?.id === fileItem.id
+                      ? 'border-emerald-500 bg-emerald-50'
                       : 'border-slate-200 hover:border-slate-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -257,7 +263,7 @@ const OCRprocessing = async (file) => {
         {/* Processing Status */}
         <div className="bg-white rounded-xl shadow-md p-6">
           <h3 className="text-lg font-semibold text-slate-800 mb-4">Processing Status</h3>
-          
+
           {!selectedFile ? (
             <div className="text-center py-8">
               <MdTextFields className="w-12 h-12 text-slate-300 mx-auto mb-3" />
@@ -275,9 +281,8 @@ const OCRprocessing = async (file) => {
 
               {/* Processing Steps */}
               <div className="space-y-3">
-                <div className={`flex items-center gap-3 p-3 rounded-lg ${
-                  ocrResults ? 'bg-emerald-50 border border-emerald-200' : 'bg-slate-50'
-                }`}>
+                <div className={`flex items-center gap-3 p-3 rounded-lg ${ocrResults ? 'bg-emerald-50 border border-emerald-200' : 'bg-slate-50'
+                  }`}>
                   {isProcessing ? (
                     <FiRefreshCw className="w-5 h-5 text-emerald-600 animate-spin" />
                   ) : ocrResults ? (
@@ -289,15 +294,14 @@ const OCRprocessing = async (file) => {
                     <p className="font-medium text-slate-800 text-sm">OCR Text Extraction</p>
                     <p className="text-xs text-slate-500">
                       {isProcessing ? 'Extracting text from document...' :
-                       ocrResults ? 'Text extraction completed' :
-                       'Waiting to process'}
+                        ocrResults ? 'Text extraction completed' :
+                          'Waiting to process'}
                     </p>
                   </div>
                 </div>
 
-                <div className={`flex items-center gap-3 p-3 rounded-lg ${
-                  nerResults ? 'bg-emerald-50 border border-emerald-200' : 'bg-slate-50'
-                }`}>
+                <div className={`flex items-center gap-3 p-3 rounded-lg ${nerResults ? 'bg-emerald-50 border border-emerald-200' : 'bg-slate-50'
+                  }`}>
                   {nerResults ? (
                     <FiCheck className="w-5 h-5 text-emerald-600" />
                   ) : (
@@ -311,9 +315,8 @@ const OCRprocessing = async (file) => {
                   </div>
                 </div>
 
-                <div className={`flex items-center gap-3 p-3 rounded-lg ${
-                  extractedData ? 'bg-emerald-50 border border-emerald-200' : 'bg-slate-50'
-                }`}>
+                <div className={`flex items-center gap-3 p-3 rounded-lg ${extractedData ? 'bg-emerald-50 border border-emerald-200' : 'bg-slate-50'
+                  }`}>
                   {extractedData ? (
                     <FiCheck className="w-5 h-5 text-emerald-600" />
                   ) : (
@@ -339,17 +342,17 @@ const OCRprocessing = async (file) => {
           <div className="bg-white rounded-xl shadow-md p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-slate-800">Extracted Text</h3>
-              <button className="text-emerald-600 hover:text-emerald-700 text-sm">
+              {/* <button className="text-emerald-600 hover:text-emerald-700 text-sm">
                 <FiDownload className="w-4 h-4 inline mr-1" />
                 Export
-              </button>
+              </button> */}
             </div>
             <div className="bg-slate-50 rounded-lg p-4 max-h-80 overflow-y-auto">
               <pre className="text-sm text-slate-700 whitespace-pre-wrap font-mono">
                 {nerResults ? renderHighlightedText(ocrResults, nerResults.entities) : ocrResults}
               </pre>
             </div>
-            
+
             {/* Entity Legend */}
             {nerResults && (
               <div className="mt-4">
@@ -370,7 +373,7 @@ const OCRprocessing = async (file) => {
           <div className="bg-white rounded-xl shadow-md p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-slate-800">Structured Data</h3>
-              <div className="flex gap-2">
+              {/* <div className="flex gap-2">
                 <button className="text-emerald-600 hover:text-emerald-700 text-sm">
                   <FiEdit3 className="w-4 h-4 inline mr-1" />
                   Edit
@@ -379,9 +382,9 @@ const OCRprocessing = async (file) => {
                   <FiDownload className="w-4 h-4 inline mr-1" />
                   Export JSON
                 </button>
-              </div>
+              </div> */}
             </div>
-            
+
             {extractedData && (
               <div className="space-y-4">
                 {/* Claim Information */}
@@ -393,15 +396,15 @@ const OCRprocessing = async (file) => {
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
                       <label className="text-slate-500">Claim Number</label>
-                      <p className="font-medium text-slate-800">{extractedData.claimNumber}</p>
+                      <p className="font-medium text-slate-800">{extractedData.certificate_number}</p>
                     </div>
                     <div>
                       <label className="text-slate-500">Status</label>
-                      <p className="font-medium text-slate-800">{extractedData.status}</p>
+                      <p className="font-medium text-slate-800">{extractedData.claim_status}</p>
                     </div>
                     <div>
-                      <label className="text-slate-500">Application Date</label>
-                      <p className="font-medium text-slate-800">{extractedData.applicationDate}</p>
+                      <label className="text-slate-500">Issue Date</label>
+                      <p className="font-medium text-slate-800">{extractedData.issue_date}</p>
                     </div>
                     <div>
                       <label className="text-slate-500">Claim Type</label>
@@ -419,30 +422,34 @@ const OCRprocessing = async (file) => {
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
                       <label className="text-slate-500">Claimant Name</label>
-                      <p className="font-medium text-slate-800">{extractedData.claimantName}</p>
+                      <p className="font-medium text-slate-800">{extractedData.claimant_name}</p>
                     </div>
                     <div>
                       <label className="text-slate-500">Father's Name</label>
-                      <p className="font-medium text-slate-800">{extractedData.fatherName}</p>
+                      <p className="font-medium text-slate-800">{extractedData.father_name}</p>
+                    </div>
+                    <div>
+                      <label className="text-slate-500">Spouse's Name</label>
+                      <p className="font-medium text-slate-800">{extractedData.spouse_name}</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Location Details */}
+                {/* Location Details & Land Details */}
                 <div>
                   <h4 className="font-medium text-slate-800 mb-2 flex items-center gap-2">
                     <MdLocationOn className="w-4 h-4 text-green-600" />
-                    Location Details
+                    Location Details & Land Details
                   </h4>
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
                       <label className="text-slate-500">Village</label>
                       <p className="font-medium text-slate-800">{extractedData.village}</p>
                     </div>
-                    <div>
-                      <label className="text-slate-500">Block</label>
+                    {/* <div>
+                      <label className="text-slate-500">Land Area</label>
                       <p className="font-medium text-slate-800">{extractedData.block}</p>
-                    </div>
+                    </div> */}
                     <div>
                       <label className="text-slate-500">District</label>
                       <p className="font-medium text-slate-800">{extractedData.district}</p>
@@ -451,30 +458,29 @@ const OCRprocessing = async (file) => {
                       <label className="text-slate-500">State</label>
                       <p className="font-medium text-slate-800">{extractedData.state}</p>
                     </div>
-                    <div className="col-span-2">
+                    {/* <div className="col-span-2">
                       <label className="text-slate-500">Coordinates</label>
                       <p className="font-medium text-slate-800">{extractedData.coordinates}</p>
+                    </div> */}
+                    <div>
+                      <label className="text-slate-500">Area Claimed</label>
+                      <p className="font-medium text-slate-800">{extractedData.land_area} hectares</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Land Details */}
                 <div>
-                  <h4 className="font-medium text-slate-800 mb-2">Land Details</h4>
+                  <h4 className="font-medium text-slate-800 mb-2">Authority Details</h4>
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
-                      <label className="text-slate-500">Survey Number</label>
-                      <p className="font-medium text-slate-800">{extractedData.surveyNumber}</p>
-                    </div>
-                    <div>
-                      <label className="text-slate-500">Area Claimed</label>
-                      <p className="font-medium text-slate-800">{extractedData.areaClaimed} hectares</p>
+                      <label className="text-slate-500">Authority</label>
+                      <p className="font-medium text-slate-800">{extractedData.authority} hectares</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="pt-4 border-t border-slate-200">
+                {/* <div className="pt-4 border-t border-slate-200">
                   <div className="flex gap-3">
                     <button className="flex-1 bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition-colors text-sm">
                       Save to Database
@@ -483,7 +489,7 @@ const OCRprocessing = async (file) => {
                       Verify Data
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
             )}
           </div>
