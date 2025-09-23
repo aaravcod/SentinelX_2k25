@@ -3,7 +3,7 @@ import { FiMap } from 'react-icons/fi';
 import { MdInfo, MdClose } from 'react-icons/md';
 
 const AtlasPage = () => {
-  //const [infoPanelOpen, setInfoPanelOpen] = useState(false); // ✅ State is defined
+  // const [infoPanelOpen] = useState(false);
 
   return (
     <div className="flex flex-col lg:flex-row h-full gap-6">
